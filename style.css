@@ -1,0 +1,271 @@
+* {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+    box-sizing: border-box;
+    color: white;
+}
+
+body, html {
+    height: 100%;
+    min-width: 375px;
+    min-height: 700px;
+}
+
+body, html, input, button, .name-surname{
+    width: 100%;
+}
+
+body, html, main, .left, .right, .info, .front, .back, .name,
+.date, .number, .button, .exp-div, .cvc-div, .month-year, .month,
+.year, .front-side, .name-surname, .logo, .mid {
+    display: flex;
+}
+
+main, .left, .right, .info, .exp-div, .cvc-div,
+.name, .number, .front-side {
+    flex-direction: column;
+}
+
+.date, .month-year, .name-surname {
+    flex-direction: row;
+}
+
+body {
+    justify-content: center;
+    align-items: center;
+    padding: 10% 7%;
+}
+
+main {
+    width: 322.5px;
+}
+
+button {
+    background-color: hsl(278, 68%, 11%);
+}
+
+button, .back div {
+    border: 0;
+}
+
+.left {
+    position: relative;
+    height: 190px;
+    background-image: url("./images/bg-main-mobile.png"); 
+}
+
+.left img {
+    width: 75%;
+}
+
+.left img, .back div, .mid, .name-surname {
+    position: absolute;
+}
+
+.back div, p {
+    font-size: 0.6rem;
+}
+
+.back div {
+    background-color: unset;
+    color: white;
+    top: 45.5%;
+    left: 80%;
+}
+
+.logo img{
+    margin: 5%;
+    width: 15%;
+}
+
+.front img{
+    top: 55%;
+    left: 5%;
+}
+
+.mid, .name-surname {
+    left: 10%;
+}
+
+.mid, .identity, .year, p {
+    letter-spacing: 0.1rem;
+}
+
+.mid {
+    top: 90%;
+    font-size: 0.85rem;
+}
+
+.name-surname {
+    top: 110%;
+}
+
+.identity, .year {
+    font-size: 0.5rem;
+}
+
+.back img {
+    top: 15%;
+    left: 20%;
+}
+
+button, input {
+    padding: 0.5rem 0.7rem;
+    border-radius: 0.5rem;
+}
+
+::placeholder {
+    color: hsl(270, 3%, 87%);
+}
+
+.info {
+    padding: 30% 10% 10% 5%;
+    background-color: hsl(0, 0%, 98%);
+}
+
+.name, .number, .date {
+    margin-bottom: 7%;
+}
+
+.date p {
+    margin-bottom: 2%;
+}
+
+.name p, .number p {
+    margin-bottom: 1%;
+}
+
+.month, .year, .exp-div, .cvc-div {
+    flex-basis: 48%;
+}
+
+.info p {
+    color: hsl(278, 68%, 11%);
+}
+
+.date, .month-year, .name-surname {
+    justify-content: space-between;
+}
+
+input {
+    border: 1px solid hsl(270, 3%, 87%);
+}
+
+#image {
+    margin-top: 30%;
+    width: 20%;
+    align-self: center;
+}
+
+#heading, #para, input{
+    color:hsl(278, 68%, 11%); ;
+}
+
+#heading, #para, #image {
+    margin-bottom: 10%;
+    align-self: center;
+}
+
+#heading, #para {
+    letter-spacing:unset ;
+}
+
+#heading {
+    font-size: 1.4rem;
+}
+
+button:hover{
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+@media (min-width:900px){
+
+    html, body {
+        min-width: 1440px;
+        min-height: 590px;
+    }
+
+    main {
+        width: 1440px;
+        height: 586.2px;
+        flex-direction: row;
+    }
+
+    .left {
+        flex-basis: 35%;
+        height: auto;
+        background-image: url("./images/bg-main-desktop.png");
+        width: 100%;
+        background-size: cover;
+    }
+
+    .left img {
+        width: 65%;
+    }
+
+    .right {
+        flex-basis: 65%;
+        padding: 10% 20% 10% 20%;
+    }
+
+    .info {
+        background-color: white;
+    }
+
+    .info, body {
+        padding: unset;
+    }
+
+    .front img{
+        top: 20%;
+        left: 50%;
+    }
+
+    .back img {
+        top: 55%;
+        left: 65%;
+    }
+
+    .back div {
+        top: 68%;
+        left: 117%;
+    }
+
+    .logo img{
+        margin: 4%;
+        width: 10%;
+    }
+
+    .mid {
+        top: 37%;
+        font-size: 1rem;
+    }
+    
+    .mid, .name-surname {
+        left: 55%;
+        width: 250px;
+    }
+    .name-surname {
+        top: 43%;
+        letter-spacing: normal;
+    }
+
+    .year{
+        justify-content: right;
+    }
+
+    .identity {
+        width: 80%;
+    }
+
+    .year, .identity, .back div {
+        font-size: 0.9rem;
+    }
+
+    #image {
+        margin-top: 8%;
+    }
+}
