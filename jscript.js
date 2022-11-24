@@ -84,7 +84,108 @@ function cardCheck() {
     }
 }
 
-function spacingFunction() {
-    let varNumber = document.getElementById('cardnumber');
-    varNumber.value = varNumber.value.replace(/[^\dA-Z]/g, '').replace(/(.{4})/g, '$1 ').trim();
+function input_credit_card(input) {
+
+  var format_and_pos = function(char, backspace){
+    var start = 0;
+    var end = 0;
+    var pos = 0;
+    var separator = " ";
+    var value = input.value;
+  
+    if (char !== false){
+      start = input.selectionStart;
+      end = input.selectionEnd;
+  
+        if (backspace && start > 0){
+          start--;
+  
+          if (value[start] == separator){ 
+            start--; 
+          }
+        }
+
+      value = value.substring(0, start) + char + value.substring(end);
+      pos = start + char.length; 
+    }
+  
+    var d = 0; 
+    var dd = 0; 
+    var gi = 0; 
+    var newV = "";
+    var groups = [4, 4, 4, 4];  
+      
+    for (var i = 0; i < value.length; i++){
+        
+      if (/\D/.test(value[i])){
+        
+        if (start > i){ 
+          pos--; 
+        }
+      }
+
+      else {
+        if (d === groups[gi]){
+          newV += separator;
+          d = 0;
+          gi++;
+    
+          if (start >= i){
+            pos++; 
+          }
+        }
+
+        newV += value[i];
+        d++;
+        dd++;
+      }
+
+      if (d === groups[gi] && groups.length === gi + 1){ 
+        break; 
+      }
+    }
+    
+    input.value = newV;
+    
+    if (char !== false){ 
+      input.setSelectionRange(pos, pos); 
+    }
+  }
+  
+  input.addEventListener('keypress', function(e){
+            
+    var code = e.charCode || e.keyCode || e.which;
+
+    if (code !== 9 && (code < 37 || code > 40) && !(e.ctrlKey && (code === 99 || code === 118))){
+        
+      e.preventDefault();
+      var char = String.fromCharCode(code);
+        
+      if (/\D/.test(char) || (this.selectionStart === this.selectionEnd && this.value.replace(/\D/g, '').length >= 16)){          
+        return false;
+      }
+        
+      format_and_pos(char);     
+    }
+  });
+
+  input.addEventListener('keydown', function(e){
+    
+    if (e.keyCode === 8 || e.keyCode === 46) {
+      e.preventDefault();
+      format_and_pos('', this.selectionStart === this.selectionEnd);
+    }
+  });
+        
+  input.addEventListener('paste', function() {
+    setTimeout(function(){ format_and_pos(''); }, 50);
+  });
 }
+        
+window.onload = afterDomIsLoaded;
+
+function afterDomIsLoaded() {
+  let cardNumberElement = document.querySelector('#cardnumber');
+  input_credit_card(cardNumberElement);
+}
+
