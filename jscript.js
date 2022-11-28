@@ -84,9 +84,9 @@ function cardCheck() {
     }
 }
 
-function input_credit_card(input) {
+function inputCreditCard(input) {
 
-  var format_and_pos = function(char, backspace){
+  var formatedInput = function(char, backspace){
     var start = 0;
     var end = 0;
     var pos = 0;
@@ -113,7 +113,7 @@ function input_credit_card(input) {
     var dd = 0; 
     var gi = 0; 
     var newV = "";
-    var groups = [4, 4, 4, 4];  
+    var groups = /^\D*3[47]/.test(value) ? [4, 6, 5] : [4, 4, 4, 4];  
       
     for (var i = 0; i < value.length; i++){
         
@@ -161,11 +161,12 @@ function input_credit_card(input) {
       e.preventDefault();
       var char = String.fromCharCode(code);
         
-      if (/\D/.test(char) || (this.selectionStart === this.selectionEnd && this.value.replace(/\D/g, '').length >= 16)){          
+      if (/\D/.test(char) || (this.selectionStart === this.selectionEnd &&
+        this.value.replace(/\D/g, '').length >= (/^\D*3[47]/.test(this.value) ? 15 : 16))){          
         return false;
       }
         
-      format_and_pos(char);     
+      formatedInput(char);     
     }
   });
 
@@ -173,12 +174,12 @@ function input_credit_card(input) {
     
     if (e.keyCode === 8 || e.keyCode === 46) {
       e.preventDefault();
-      format_and_pos('', this.selectionStart === this.selectionEnd);
+      formatedInput('', this.selectionStart === this.selectionEnd);
     }
   });
         
   input.addEventListener('paste', function() {
-    setTimeout(function(){ format_and_pos(''); }, 50);
+    setTimeout(function(){ formatedInput(''); }, 50);
   });
 }
         
@@ -186,6 +187,6 @@ window.onload = afterDomIsLoaded;
 
 function afterDomIsLoaded() {
   let cardNumberElement = document.querySelector('#cardnumber');
-  input_credit_card(cardNumberElement);
+  inputCreditCard(cardNumberElement);
 }
 
